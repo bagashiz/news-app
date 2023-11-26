@@ -5,6 +5,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .q(query)
                         .build(),
                 new NewsApiClient.ArticlesResponseCallback() {
+                    @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onSuccess(ArticleResponse response) {
 
@@ -107,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onFailure(Throwable throwable) {
-                        Log.i("GOT Failure",throwable.getMessage());
+                        Log.i("GOT Failure", Objects.requireNonNull(throwable.getMessage()));
                     }
                 }
         );
